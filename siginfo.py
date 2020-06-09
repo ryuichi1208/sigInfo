@@ -42,6 +42,7 @@ SIGNAL_NUNMBER = (
     "SIGRTMIN",
 )
 
+
 class ProcInfo(object):
     def __init__(self, name, pid, ppid, fdsize):
         self.name = name
@@ -50,14 +51,25 @@ class ProcInfo(object):
         self.fdsize = fdsize
 
 
-def opt_parse(args):
+def gen_pid_file(pid: int) -> str:
+    """
+    対象のpidファイル名を生成して文字列でリターン
+    """
+    file_name = f"/proc/{pid}/status"
+    return file_name if os.path.isfile(file_name) else None
+
+
+def opt_parse(args: list):
     """
     オプション解析
     """
     usage = f"Usage: {__file__}"
     argparser = ArgumentParser(usage=usage)
     argparser.add_argument(
-        "-f", "--file", type=str, dest="pidf_ile", help="concatnate target file name"
+        "-f", "--file", type=str, dest="pid_file", help="concatnate target file name"
+    )
+    argparser.add_argument(
+        "-p", "--pid", type=int, dest="pidf", help="concatnate target pid"
     )
     return argparser.parse_args()
 
@@ -97,8 +109,8 @@ def print_sig_info(er: dict):
         print()
 
 
-def main(args):
-    er = extract_rows(args.pidf_ile)
+def main(args: list):
+    er = extract_rows(args.pid_file)
     print_sig_info(er)
 
 
