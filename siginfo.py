@@ -42,6 +42,13 @@ SIGNAL_NUNMBER = (
     "SIGRTMIN",
 )
 
+class ProcInfo(object):
+    def __init__(self, name, pid, ppid, fdsize):
+        self.name = name
+        self.pid = pid
+        self.ppid = ppid
+        self.fdsize = fdsize
+
 
 def opt_parse(args):
     """
