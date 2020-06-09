@@ -7,39 +7,39 @@ import sys
 from argparse import ArgumentParser
 
 SIGNAL_NUNMBER = (
-    "SIGHUP",
-    "SIGQUIT",
-    "SIGILL",
-    "SIGTRAP",
-    "SIGABRT",
-    "SIGIOT",
-    "SIGBUS",
-    "SIGFPE",
-    "SIGKILL",
-    "SIGUSR1",
-    "SIGSEGV",
-    "SIGUSR2",
-    "SIGPIPE",
-    "SIGALRM",
-    "SIGTERM",
-    "SIGSTKFLT",
-    "SIGCHLD",
-    "SIGCONT",
-    "SIGSTOP",
-    "SIGTSTP",
-    "SIGTTIN",
-    "SIGTTOU",
-    "SIGURG",
-    "SIGXCPU",
-    "SIGXFSZ",
-    "SIGVTALRM",
-    "SIGPROF",
-    "SIGWINCH",
-    "SIGIO",
-    "SIGPOLL",
-    "SIGPWR",
-    "SIGSYS",
-    "SIGRTMIN",
+    "SIGHUP",  # ハングアップ
+    "SIGQUIT",  # 終了とコアダンプ
+    "SIGILL",  # 不正命令
+    "SIGTRAP",  # トレース/ブレークポイントによるトラップ
+    "SIGABRT",  # プロセスが中断された
+    "SIGIOT",  # IOT 命令
+    "SIGBUS",  # 「未定義メモリ領域へのアクセス」(SUS)によるバスエラー
+    "SIGFPE",  # 浮動小数点例外 -- 「不正な算術操作」(SUS)
+    "SIGKILL",  # Kill シグナル
+    "SIGUSR1",  # ユーザー定義シグナル 1
+    "SIGSEGV",  # 不正なメモリー参照
+    "SIGUSR2",  # ユーザー定義シグナル 2
+    "SIGPIPE",  #
+    "SIGALRM",  # alarm() によるシグナル
+    "SIGTERM",  #
+    "SIGSTKFLT",  # 数値演算プロセッサにおけるスタックフォルト
+    "SIGCHLD",  # 子プロセスが終了、停止（または再開*）した
+    "SIGCONT",  #
+    "SIGSTOP",  #
+    "SIGTSTP",  #
+    "SIGTTIN",  # バックグランドプロセスの端末入力
+    "SIGTTOU",  # バックグランドプロセスの端末出力
+    "SIGURG",  # ソケットの緊急事態 (urgent condition) (4.2BSD)
+    "SIGXCPU",  # CPU時間制限超過 (4.2BSD)
+    "SIGXFSZ",  #
+    "SIGVTALRM",  #
+    "SIGPROF",  # profiling タイマーの時間切れ
+    "SIGWINCH",  #
+    "SIGIO",  #
+    "SIGPOLL",  #
+    "SIGPWR",  # 電源喪失 (Power failure) (System V)
+    "SIGSYS",  # ルーチンへの引き数が不正 (SVr4)
+    "SIGRTMIN",  #
 )
 
 
