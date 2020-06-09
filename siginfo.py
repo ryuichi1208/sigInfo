@@ -6,7 +6,7 @@ import sys
 
 from argparse import ArgumentParser
 
-SIGNAL_NUNMBER=(
+SIGNAL_NUNMBER = (
     "SIGHUP",
     "SIGQUIT",
     "SIGILL",
@@ -39,20 +39,36 @@ SIGNAL_NUNMBER=(
     "SIGPOLL",
     "SIGPWR",
     "SIGSYS",
-    "SIGRTMIN"
+    "SIGRTMIN",
 )
 
+
 def opt_parse(args):
+    """
+    オプション解析
+    """
     usage = f"Usage: {__file__}"
     argparser = ArgumentParser(usage=usage)
-    argparser.add_argument('-f', '--file', type=str,dest='pidf_ile',help='concatnate target file name')
+    argparser.add_argument(
+        "-f", "--file", type=str, dest="pidf_ile", help="concatnate target file name"
+    )
     return argparser.parse_args()
 
 
-def extract_rows(file_name:str) -> dict:
+def extract_rows(file_name: str) -> dict:
+    """
+    procファイルから必要な行だけを抽出して辞書を生成
+    """
     try:
         with open(file_name, mode="r", buffering=-1, closefd=True) as f:
-            er = dict([l.strip().split("\t") for l in f if l.startswith("Sig") and not l.startswith("SigQ")])
+            er = dict(
+                [
+                    l.strip().split("\t")
+                    for l in f
+                    if l.startswith("Sig") and not l.startswith("SigQ")
+                ]
+            )
+            # 2進数へ変換
             for k, v in er.items():
                 er[k] = format(int(v, 16), "b")
             return er
@@ -60,7 +76,11 @@ def extract_rows(file_name:str) -> dict:
         print(e)
         sys.exit(255)
 
+
 def print_sig_info(er: dict):
+    """
+    取得した情報から各シグナルの情報を表示
+    """
     for k, v in er.items():
         print(k, end=" ")
         rv = v[::-1]
