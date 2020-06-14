@@ -117,6 +117,8 @@ def signal_doc():
 *»-----+--------------------+------------------+
 *»-----|  SIGEMT            |  coredump»-------|
 *»-----+--------------------+------------------+    
+
+(+) For SIGKILL and SIGSTOP the action is "always", not just "default".
     """
 
 
