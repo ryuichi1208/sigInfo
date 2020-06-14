@@ -73,6 +73,52 @@ def opt_parse(args: list):
     )
     return argparser.parse_args()
 
+def signal_doc():
+    doc = """
+* The job control signals also have other special effects.
+*
+*»-----+--------------------+------------------+
+*»-----|  POSIX signal      |  default action  |
+*»-----+--------------------+------------------+
+*»-----|  SIGHUP            |  terminate»------|
+*»-----|  SIGINT            |»-terminate»------|
+*»-----|  SIGQUIT           |»-coredump »------|
+*»-----|  SIGILL            |»-coredump »------|
+*»-----|  SIGTRAP           |»-coredump »------|
+*»-----|  SIGABRT/SIGIOT    |»-coredump »------|
+*»-----|  SIGBUS            |»-coredump »------|
+*»-----|  SIGFPE            |»-coredump »------|
+*»-----|  SIGKILL           |»-terminate(+)»---|
+*»-----|  SIGUSR1           |»-terminate»------|
+*»-----|  SIGSEGV           |»-coredump »------|
+*»-----|  SIGUSR2           |»-terminate»------|
+*»-----|  SIGPIPE           |»-terminate»------|
+*»-----|  SIGALRM           |»-terminate»------|
+*»-----|  SIGTERM           |»-terminate»------|
+*»-----|  SIGCHLD           |»-ignore   »------|
+*»-----|  SIGCONT           |»-ignore(*)»------|
+*»-----|  SIGSTOP           |»-stop(*)(+)  »---|
+*»-----|  SIGTSTP           |»-stop(*)  »------|
+*»-----|  SIGTTIN           |»-stop(*)  »------|
+*»-----|  SIGTTOU           |»-stop(*)  »------|
+*»-----|  SIGURG            |»-ignore   »------|
+*»-----|  SIGXCPU           |»-coredump »------|
+*»-----|  SIGXFSZ           |»-coredump »------|
+*»-----|  SIGVTALRM         |»-terminate»------|
+*»-----|  SIGPROF           |»-terminate»------|
+*»-----|  SIGPOLL/SIGIO     |»-terminate»------|
+*»-----|  SIGSYS/SIGUNUSED  |»-coredump »------|
+*»-----|  SIGSTKFLT         |»-terminate»------|
+*»-----|  SIGWINCH          |»-ignore   »------|
+*»-----|  SIGPWR            |»-terminate»------|
+*»-----|  SIGRTMIN-SIGRTMAX |»-terminate       |
+*»-----+--------------------+------------------+
+*»-----|  non-POSIX signal  |  default action  |
+*»-----+--------------------+------------------+
+*»-----|  SIGEMT            |  coredump»-------|
+*»-----+--------------------+------------------+    
+    """
+
 
 def extract_rows(file_name: str) -> dict:
     """
