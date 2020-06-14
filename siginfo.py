@@ -19,24 +19,24 @@ SIGNAL_NUNMBER = (
     "SIGUSR1",  # ユーザー定義シグナル 1
     "SIGSEGV",  # 不正なメモリー参照
     "SIGUSR2",  # ユーザー定義シグナル 2
-    "SIGPIPE",  #
+    "SIGPIPE",  # 読み手の無いパイプへの書き出し
     "SIGALRM",  # alarm() によるシグナル
-    "SIGTERM",  #
+    "SIGTERM",  # 終了 (termination) シグナル
     "SIGSTKFLT",  # 数値演算プロセッサにおけるスタックフォルト
     "SIGCHLD",  # 子プロセスが終了、停止（または再開*）した
-    "SIGCONT",  #
-    "SIGSTOP",  #
-    "SIGTSTP",  #
+    "SIGCONT",  # Cont	一時停止 (stop) からの再開
+    "SIGSTOP",  # プロセスの一時停止
+    "SIGTSTP",  # 端末より入力された一時停止
     "SIGTTIN",  # バックグランドプロセスの端末入力
     "SIGTTOU",  # バックグランドプロセスの端末出力
     "SIGURG",  # ソケットの緊急事態 (urgent condition) (4.2BSD)
     "SIGXCPU",  # CPU時間制限超過 (4.2BSD)
-    "SIGXFSZ",  #
-    "SIGVTALRM",  #
+    "SIGXFSZ",  # ファイルサイズ制限の超過
+    "SIGVTALRM",  # 仮想アラームクロック
     "SIGPROF",  # profiling タイマーの時間切れ
-    "SIGWINCH",  #
-    "SIGIO",  #
-    "SIGPOLL",  #
+    "SIGWINCH",  # ウィンドウ リサイズ シグナル (4.3BSD, Sun)
+    "SIGIO",  # 入出力が可能になった (4.2BSD)
+    "SIGPOLL",  # Term	ポーリング可能なイベント (Sys V)
     "SIGPWR",  # 電源喪失 (Power failure) (System V)
     "SIGSYS",  # ルーチンへの引き数が不正 (SVr4)
     "SIGRTMIN",  #
