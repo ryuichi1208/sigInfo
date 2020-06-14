@@ -73,6 +73,7 @@ def opt_parse(args: list):
     )
     return argparser.parse_args()
 
+
 def signal_doc():
     doc = """
 * The job control signals also have other special effects.
