@@ -101,6 +101,9 @@ def opt_parse(args: list):
     argparser.add_argument(
         "-p", "--pid", type=int, dest="pidf", help="concatnate target pid"
     )
+    argparser.add_argument(
+        "-d", "--doc", type=int, dest="doc", help="Display documentation about signals"
+    )
     return argparser.parse_args()
 
 
@@ -171,6 +174,7 @@ def extract_rows(file_name: str) -> dict:
     """
     procファイルから必要な行だけを抽出して辞書を生成
     """
+    print(f"ProcFile : {file_name}")
     try:
         with open(file_name, mode="r", buffering=-1, closefd=True) as f:
             er = dict(
