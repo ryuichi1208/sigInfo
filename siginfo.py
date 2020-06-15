@@ -203,7 +203,10 @@ def print_sig_info(er: dict):
 
 
 def main(args: list):
-    er = extract_rows(args.pid_file)
+    if args.pid_file:
+        er = extract_rows(args.pid_file)
+    else:
+        er = extract_rows(gen_pid_file(args.pidf))
     print_sig_info(er)
 
 
