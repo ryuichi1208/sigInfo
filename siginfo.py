@@ -20,27 +20,57 @@ SIGNAL_NUNMBER = (
     "SIGUSR1",  # ユーザー定義シグナル 1
     "SIGSEGV",  # 不正なメモリー参照
     "SIGUSR2",  # ユーザー定義シグナル 2
-    "SIGPIPE",  #
+    "SIGPIPE",  # 読み手の無いパイプへの書き出し
     "SIGALRM",  # alarm() によるシグナル
-    "SIGTERM",  #
+    "SIGTERM",  # 終了 (termination) シグナル
     "SIGSTKFLT",  # 数値演算プロセッサにおけるスタックフォルト
     "SIGCHLD",  # 子プロセスが終了、停止（または再開*）した
-    "SIGCONT",  #
-    "SIGSTOP",  #
-    "SIGTSTP",  #
+    "SIGCONT",  # Cont	一時停止 (stop) からの再開
+    "SIGSTOP",  # プロセスの一時停止
+    "SIGTSTP",  # 端末より入力された一時停止
     "SIGTTIN",  # バックグランドプロセスの端末入力
     "SIGTTOU",  # バックグランドプロセスの端末出力
     "SIGURG",  # ソケットの緊急事態 (urgent condition) (4.2BSD)
     "SIGXCPU",  # CPU時間制限超過 (4.2BSD)
-    "SIGXFSZ",  #
-    "SIGVTALRM",  #
+    "SIGXFSZ",  # ファイルサイズ制限の超過
+    "SIGVTALRM",  # 仮想アラームクロック
     "SIGPROF",  # profiling タイマーの時間切れ
-    "SIGWINCH",  #
-    "SIGIO",  #
-    "SIGPOLL",  #
+    "SIGWINCH",  # ウィンドウ リサイズ シグナル (4.3BSD, Sun)
+    "SIGIO",  # 入出力が可能になった (4.2BSD)
+    "SIGPOLL",  # Term	ポーリング可能なイベント (Sys V)
     "SIGPWR",  # 電源喪失 (Power failure) (System V)
     "SIGSYS",  # ルーチンへの引き数が不正 (SVr4)
     "SIGRTMIN",  #
+    "SIGRTMIN+1",  #
+    "SIGRTMIN+2",  #
+    "SIGRTMIN+3",  #
+    "SIGRTMIN+4",  #
+    "SIGRTMIN+5",  #
+    "SIGRTMIN+6",  #
+    "SIGRTMIN+7",  #
+    "SIGRTMIN+8",  #
+    "SIGRTMIN+9",  #
+    "SIGRTMIN+10",  #
+    "SIGRTMIN+11",  #
+    "SIGRTMIN+12",  #
+    "SIGRTMIN+13",  #
+    "SIGRTMIN+14",  #
+    "SIGRTMIN+15",  #
+    "SIGRTMAX-14",  #
+    "SIGRTMAX-13",  #
+    "SIGRTMAX-12",  #
+    "SIGRTMAX-11",  #
+    "SIGRTMAX-10",  #
+    "SIGRTMAX-9",  #
+    "SIGRTMAX-8",  #
+    "SIGRTMAX-7",  #
+    "SIGRTMAX-6",  #
+    "SIGRTMAX-5",  #
+    "SIGRTMAX-4",  #
+    "SIGRTMAX-3",  #
+    "SIGRTMAX-2",  #
+    "SIGRTMAX-1",  #
+    "SIGRTMAX",  #
 )
 
 
@@ -73,13 +103,80 @@ def opt_parse(args: list):
     argparser.add_argument(
         "-p", "--pid", type=int, dest="pidf", help="concatnate target pid"
     )
+    argparser.add_argument(
+        "-d", "--doc", type=int, dest="doc", help="Display documentation about signals"
+    )
     return argparser.parse_args()
+
+
+def signal_doc():
+    doc = """
+* The job control signals also have other special effects.
+*
+*»-----+--------------------+------------------+
+*»-----|  POSIX signal      |  default action  |
+*»-----+--------------------+------------------+
+*»-----|  SIGHUP            |  terminate»------|
+*»-----|  SIGINT            |»-terminate»------|
+*»-----|  SIGQUIT           |»-coredump »------|
+*»-----|  SIGILL            |»-coredump »------|
+*»-----|  SIGTRAP           |»-coredump »------|
+*»-----|  SIGABRT/SIGIOT    |»-coredump »------|
+*»-----|  SIGBUS            |»-coredump »------|
+*»-----|  SIGFPE            |»-coredump »------|
+*»-----|  SIGKILL           |»-terminate(+)»---|
+*»-----|  SIGUSR1           |»-terminate»------|
+*»-----|  SIGSEGV           |»-coredump »------|
+*»-----|  SIGUSR2           |»-terminate»------|
+*»-----|  SIGPIPE           |»-terminate»------|
+*»-----|  SIGALRM           |»-terminate»------|
+*»-----|  SIGTERM           |»-terminate»------|
+*»-----|  SIGCHLD           |»-ignore   »------|
+*»-----|  SIGCONT           |»-ignore(*)»------|
+*»-----|  SIGSTOP           |»-stop(*)(+)  »---|
+*»-----|  SIGTSTP           |»-stop(*)  »------|
+*»-----|  SIGTTIN           |»-stop(*)  »------|
+*»-----|  SIGTTOU           |»-stop(*)  »------|
+*»-----|  SIGURG            |»-ignore   »------|
+*»-----|  SIGXCPU           |»-coredump »------|
+*»-----|  SIGXFSZ           |»-coredump »------|
+*»-----|  SIGVTALRM         |»-terminate»------|
+*»-----|  SIGPROF           |»-terminate»------|
+*»-----|  SIGPOLL/SIGIO     |»-terminate»------|
+*»-----|  SIGSYS/SIGUNUSED  |»-coredump »------|
+*»-----|  SIGSTKFLT         |»-terminate»------|
+*»-----|  SIGWINCH          |»-ignore   »------|
+*»-----|  SIGPWR            |»-terminate»------|
+*»-----|  SIGRTMIN-SIGRTMAX |»-terminate       |
+*»-----+--------------------+------------------+
+*»-----|  non-POSIX signal  |  default action  |
+*»-----+--------------------+------------------+
+*»-----|  SIGEMT            |  coredump»-------|
+*»-----+--------------------+------------------+
+
+(+) For SIGKILL and SIGSTOP the action is "always", not just "default".
+    """
+
+    enf_sampla_format = """
+00000000280b2603 ==> 101000000010110010011000000011
+                     | |       | ||  |  ||       |`->  1 = SIGHUP
+                     | |       | ||  |  ||       `-->  2 = SIGINT
+                     | |       | ||  |  |`----------> 10 = SIGUSR1
+                     | |       | ||  |  `-----------> 11 = SIGSEGV
+                     | |       | ||  `--------------> 14 = SIGALRM
+                     | |       | |`-----------------> 17 = SIGCHLD
+                     | |       | `------------------> 18 = SIGCONT
+                     | |       `--------------------> 20 = SIGTSTP
+                     | `----------------------------> 28 = SIGWINCH
+                     `------------------------------> 30 = SIGPWR
+    """
 
 
 def extract_rows(file_name: str) -> dict:
     """
     procファイルから必要な行だけを抽出して辞書を生成
     """
+    print(f"ProcFile : {file_name}")
     try:
         with open(file_name, mode="r", buffering=-1, closefd=True) as f:
             er = dict(
@@ -112,7 +209,10 @@ def print_sig_info(er: dict):
 
 
 def main(args: list):
-    er = extract_rows(args.pid_file)
+    if args.pid_file:
+        er = extract_rows(args.pid_file)
+    else:
+        er = extract_rows(gen_pid_file(args.pidf))
     print_sig_info(er)
 
 
