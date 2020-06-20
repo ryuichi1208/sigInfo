@@ -4,6 +4,7 @@
 import os
 import sys
 
+from functools import lru_cache
 from argparse import ArgumentParser
 
 SIGNAL_NUNMBER = (
@@ -51,6 +52,7 @@ class ProcInfo(object):
         self.fdsize = fdsize
 
 
+@lru_cache(maxsize=128, typed=False)
 def gen_pid_file(pid: int) -> str:
     """
     対象のpidファイル名を生成して文字列でリターン
