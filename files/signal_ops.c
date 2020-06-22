@@ -4,8 +4,17 @@
 #include <signal.h>
 #include <errno.h>
 
-#define unsigne long long u64
+#ifdef DEBUG
+#define SLEEP_TIME 30
+#endif
+#ifndef DEBUG
 #define SLEEP_TIME 1
+#endif
+
+#ifndef _CONSOLE
+#define unsigne long long u64
+#define swap(type,a,b)  {type tmp=a;a=b;b=tmp;}w
+#endif
 
 unsigned int SIGNAL_ARR[] = {
     SIGHUP,
@@ -23,7 +32,9 @@ unsigned int SIGNAL_ARR[] = {
     SIGPIPE,
     SIGALRM,
     SIGTERM,
+#if defined (__linux__) || defined (__linux) || defined (__unix)
     SIGSTKFLT,
+#endif
     SIGCHLD,
     SIGCONT,
     SIGSTOP,
@@ -36,10 +47,14 @@ unsigned int SIGNAL_ARR[] = {
     SIGVTALRM,
     SIGPROF,
     SIGWINCH,
+#if defined (__linux__) || defined (__linux) || defined (__unix)
     SIGIO,
     SIGPWR,
+#endif
     SIGSYS,
 };
+
+typedef void (*__sighandler_t)(int);
 
 void print_proc_info()
 {
@@ -64,6 +79,7 @@ void signal_mask(sigset_t *set)
 
 int main(void)
 {
+    print_proc_info();
     sigset_t set;
     signal_mask(&set);
     sleep(SLEEP_TIME);
